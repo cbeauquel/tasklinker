@@ -1,0 +1,22 @@
+{% extends 'base.html.twig' %}
+{% set action = app.current_route == 'app_project_new' ? 'Ajout' : 'Édition' %}
+
+{% block title %}{{ action }}d'un projet{% endblock %}
+
+{% block body %}
+<main>
+    <header>
+        <div id="current-user"></div>
+            <div id="title-page">
+                <h1>{{ action }} d'un projet</h1>
+            </div>
+    </header>
+    <div id="content">
+        {{ form_start(form) }}
+        {{ form_widget(form) }}
+        <button type="submit" class="button button-submit">Envoyer</button>
+        {{ form_end(form) }}
+    </div>
+</main>
+
+{% endblock %}

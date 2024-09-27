@@ -2,11 +2,16 @@
 
 namespace App\Entity;
 
+use App\Entity\Employee;
+use App\Entity\Project;
+use App\Entity\Status;
 use App\Repository\TaskRepository;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Validator\Constraints as Assert;
+
 
 #[ORM\Entity(repositoryClass: TaskRepository::class)]
 class Task
@@ -25,11 +30,9 @@ class Task
     #[ORM\Column(type: Types::DATE_IMMUTABLE)]
     private ?\DateTimeImmutable $StartDate = null;
 
-    /**
-     * @var Collection<int, Employee>
-     */
-    #[ORM\ManyToMany(targetEntity: Employee::class, inversedBy: 'tasks')]
-    private Collection $Employee;
+    #[ORM\ManyToOne(inversedBy: 'tasks')]
+    #[ORM\JoinColumn(nullable: false)]
+    private ?Employee $Employee = null;
 
     #[ORM\ManyToOne(inversedBy: 'tasks')]
     #[ORM\JoinColumn(nullable: false)]
@@ -39,10 +42,6 @@ class Task
     #[ORM\JoinColumn(nullable: false)]
     private ?Status $status = null;
 
-    public function __construct()
-    {
-        $this->Employee = new ArrayCollection();
-    }
 
     public function getId(): ?int
     {
@@ -85,26 +84,14 @@ class Task
         return $this;
     }
 
-    /**
-     * @return Collection<int, Employee>
-     */
-    public function getEmployee(): Collection
+    public function getEmployee(): ?Employee
     {
         return $this->Employee;
     }
 
-    public function addEmployee(Employee $employee): static
+    public function setEmployee(?Employee $Employee): static
     {
-        if (!$this->Employee->contains($employee)) {
-            $this->Employee->add($employee);
-        }
-
-        return $this;
-    }
-
-    public function removeEmployee(Employee $employee): static
-    {
-        $this->Employee->removeElement($employee);
+        $this->Employee = $Employee;
 
         return $this;
     }

@@ -6,6 +6,8 @@ use App\Repository\ProjectRepository;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
+use Doctrine\DBAL\Types\Types;
+use Symfony\Component\Validator\Constraints as Assert;
 
 #[ORM\Entity(repositoryClass: ProjectRepository::class)]
 class Project
@@ -15,6 +17,8 @@ class Project
     #[ORM\Column]
     private ?int $id = null;
 
+    #[Assert\Length(min:5)]
+    #[Assert\NotBlank]
     #[ORM\Column(length: 255)]
     private ?string $Name = null;
 

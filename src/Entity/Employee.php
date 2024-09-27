@@ -2,12 +2,15 @@
 
 namespace App\Entity;
 
+use App\Entity\Task;
+use App\Entity\Project;
 use App\Repository\EmployeeRepository;
 use App\Enum\ContractStatus;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Validator\Constraints as Assert;
 
 #[ORM\Entity(repositoryClass: EmployeeRepository::class)]
 class Employee
@@ -17,15 +20,22 @@ class Employee
     #[ORM\Column]
     private ?int $id = null;
 
+    #[Assert\Length(min:2)]
+    #[Assert\NotBlank]
     #[ORM\Column(length: 255)]
     private ?string $LastName = null;
 
+    #[Assert\Length(min:2)]
+    #[Assert\NotBlank]
     #[ORM\Column(length: 255)]
     private ?string $FirstName = null;
 
+    #[Assert\Email()]
+    #[Assert\NotBlank]
     #[ORM\Column(length: 255)]
     private ?string $Email = null;
 
+    #[Assert\NotBlank]
     #[ORM\Column(type: Types::DATE_IMMUTABLE)]
     private ?\DateTimeImmutable $EntryDate = null;
 
@@ -41,7 +51,7 @@ class Employee
     /**
      * @var Collection<int, Task>
      */
-    #[ORM\ManyToMany(targetEntity: Task::class, mappedBy: 'Employee')]
+    #[ORM\OneToMany(targetEntity: Task::class, mappedBy: 'Employee')]
     private Collection $tasks;
 
     public function __construct()

@@ -1,0 +1,58 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}{{project.name}}{% endblock %}
+
+{% block body %}
+<main>
+    <header>
+        <div id="current-user"></div>
+        <div id="title-page">
+            <div class="flex-header">
+                <h1>{{project.name}}</h1>
+                <div class="user-list">
+                    {% for employee in project.employee %}
+                    {% set initiales = employee.firstName|slice(0,1) ~ employee.lastName|slice(0,1) %}
+                    <div class="avatar">{{ initiales }}</div>
+                    {% endfor %}
+                </div>
+                <a class="button" href="{{path('app_project_edit', {id: project.id})}}">Modifier</a>
+            </div>
+        </div>
+    </header>
+    <div id="content">
+        <div id="tasks-container">
+            {% for status in project.statuses %}
+            <div class="task-column">
+                <a href="{{path('app_status_edit',{projectId: project.id,id: status.id})}}"><h2>{{status.value}}</h2></a>
+                <div class="tasks-list">
+                {% for task in status.tasks %}
+                <a class="task" href="{{path('app_task_edit',{projectId: project.id,id: task.id})}}">
+                    <h3>{{task.name}}</h3>
+                    <p>{{task.description}}</p>
+                    <div class="task-infos">
+                        <div class="task-deadline">
+                            <i class="fa-regular fa-calendar"></i>{{task.StartDate|date('d M Y') }}
+                        </div>
+                        <div class="mini-user">
+                                {% set initiales = task.employee.firstName|slice(0,1) ~ task.employee.lastName|slice(0,1) %}
+                                {{ initiales }}
+                        </div>
+                    </div>
+                </a>
+                {% endfor %}
+                <a href="{{path('app_task_new', {projectId: project.id})}}" class="task-add">
+                + Ajouter une tâche
+                </a>
+                </div>
+            </div>
+            {% endfor %}
+            <div class="task-column small">
+                <a href="{{path('app_status_new', {projectId: project.id}) }}"><h2>Ajouter des statuts</h2></a>
+            </div>
+        </div>
+
+    </div>
+
+
+</main>
+{% endblock %}

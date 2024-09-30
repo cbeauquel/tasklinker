@@ -20,29 +20,29 @@ class Project
     #[Assert\Length(min:5)]
     #[Assert\NotBlank]
     #[ORM\Column(length: 255)]
-    private ?string $Name = null;
+    private ?string $name = null;
 
     /**
      * @var Collection<int, Employee>
      */
-    #[ORM\ManyToMany(targetEntity: Employee::class, inversedBy: 'projects')]
-    private Collection $Employee;
+    #[ORM\ManyToMany(targetEntity: Employee::class, mappedBy: 'projects')]
+    private Collection $employees;
 
     /**
      * @var Collection<int, Task>
      */
-    #[ORM\OneToMany(targetEntity: Task::class, mappedBy: 'Project', orphanRemoval: true)]
+    #[ORM\OneToMany(targetEntity: Task::class, mappedBy: 'project', orphanRemoval: true)]
     private Collection $tasks;
 
     /**
      * @var Collection<int, Status>
      */
-    #[ORM\OneToMany(targetEntity: Status::class, mappedBy: 'Project')]
+    #[ORM\OneToMany(targetEntity: Status::class, mappedBy: 'project')]
     private Collection $statuses;
 
     public function __construct()
     {
-        $this->Employee = new ArrayCollection();
+        $this->employees = new ArrayCollection();
         $this->tasks = new ArrayCollection();
         $this->statuses = new ArrayCollection();
     }
@@ -54,12 +54,12 @@ class Project
 
     public function getName(): ?string
     {
-        return $this->Name;
+        return $this->name;
     }
 
-    public function setName(string $Name): static
+    public function setName(string $name): static
     {
-        $this->Name = $Name;
+        $this->name = $name;
 
         return $this;
     }
@@ -67,15 +67,16 @@ class Project
     /**
      * @return Collection<int, Employee>
      */
-    public function getEmployee(): Collection
+    public function getEmployees(): Collection
     {
-        return $this->Employee;
+        return $this->employees;
     }
 
     public function addEmployee(Employee $employee): static
     {
-        if (!$this->Employee->contains($employee)) {
-            $this->Employee->add($employee);
+        if (!$this->employees->contains($employee)) {
+            $this->employees->add($employee);
+            $employee->addProject($this);
         }
 
         return $this;
@@ -83,7 +84,7 @@ class Project
 
     public function removeEmployee(Employee $employee): static
     {
-        $this->Employee->removeElement($employee);
+        $this->employee->removeElement($employee);
 
         return $this;
     }

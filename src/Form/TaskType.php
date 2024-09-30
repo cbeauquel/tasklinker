@@ -21,14 +21,14 @@ class TaskType extends AbstractType
         $project = $options['project'];
 
         $builder
-            ->add('Name', TextType::class)
-            ->add('Description', TextareaType::class)
-            ->add('StartDate', null, [
+            ->add('name', TextType::class)
+            ->add('description', TextareaType::class)
+            ->add('startDate', null, [
                 'widget' => 'single_text',
             ])
-            ->add('Employee', EntityType::class, [
+            ->add('employee', EntityType::class, [
                 'class' => Employee::class,
-                'choices' => $project->getEmployee(),
+                'choices' => $project->getEmployees(),
                 'choice_label' => 'firstName',
                 'multiple' => false,
             ])

@@ -22,10 +22,10 @@ class Status
     #[Assert\Length(min:3)]
     #[Assert\NotBlank]
     #[ORM\Column(length: 255)]
-    private ?string $Value = null;
+    private ?string $value = null;
 
     #[ORM\ManyToOne(inversedBy: 'statuses')]
-    private ?Project $Project = null;
+    private ?Project $project = null;
 
     /**
      * @var Collection<int, Task>
@@ -45,24 +45,24 @@ class Status
 
     public function getValue(): ?string
     {
-        return $this->Value;
+        return $this->value;
     }
 
-    public function setValue(string $Value): static
+    public function setValue(string $value): static
     {
-        $this->Value = $Value;
+        $this->value = $value;
 
         return $this;
     }
 
     public function getProject(): ?Project
     {
-        return $this->Project;
+        return $this->project;
     }
 
-    public function setProject(?Project $Project): static
+    public function setProject(?Project $project): static
     {
-        $this->Project = $Project;
+        $this->project = $project;
 
         return $this;
     }

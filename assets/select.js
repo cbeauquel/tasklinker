@@ -1,5 +1,14 @@
-import $ from 'jquery';
+ import $ from 'jquery';
+
 $(document).ready(function() {
-    $('select[multiple]').select2();
+    $('.employees').select2();
 });
 
+// $(document).ready(function(){
+//     $("h2").hover(function(){
+//       alert("You entered h2!");
+//     },
+//     function(){
+//       alert("Bye! You now leave h2  !");
+//     }); 
+//   });

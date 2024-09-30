@@ -10,7 +10,7 @@
             <div class="flex-header">
                 <h1>{{project.name}}</h1>
                 <div class="user-list">
-                    {% for employee in project.employee %}
+                    {% for employee in project.employees %}
                     {% set initiales = employee.firstName|slice(0,1) ~ employee.lastName|slice(0,1) %}
                     <div class="avatar">{{ initiales }}</div>
                     {% endfor %}
@@ -31,7 +31,7 @@
                     <p>{{task.description}}</p>
                     <div class="task-infos">
                         <div class="task-deadline">
-                            <i class="fa-regular fa-calendar"></i>{{task.StartDate|date('d M Y') }}
+                            <i class="fa-regular fa-calendar"></i>{{task.startDate|date('d M Y') }}
                         </div>
                         <div class="mini-user">
                                 {% set initiales = task.employee.firstName|slice(0,1) ~ task.employee.lastName|slice(0,1) %}

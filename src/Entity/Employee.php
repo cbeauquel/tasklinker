@@ -23,35 +23,35 @@ class Employee
     #[Assert\Length(min:2)]
     #[Assert\NotBlank]
     #[ORM\Column(length: 255)]
-    private ?string $LastName = null;
+    private ?string $lastName = null;
 
     #[Assert\Length(min:2)]
     #[Assert\NotBlank]
     #[ORM\Column(length: 255)]
-    private ?string $FirstName = null;
+    private ?string $firstName = null;
 
     #[Assert\Email()]
     #[Assert\NotBlank]
     #[ORM\Column(length: 255)]
-    private ?string $Email = null;
+    private ?string $email = null;
 
     #[Assert\NotBlank]
     #[ORM\Column(type: Types::DATE_IMMUTABLE)]
-    private ?\DateTimeImmutable $EntryDate = null;
+    private ?\DateTimeImmutable $entryDate = null;
 
     #[ORM\Column(length: 255)]
-    private ?ContractStatus $ContractType = null;
+    private ?ContractStatus $contractType = null;
 
     /**
      * @var Collection<int, Project>
      */
-    #[ORM\ManyToMany(targetEntity: Project::class, mappedBy: 'Employee')]
+    #[ORM\ManyToMany(targetEntity: Project::class, inversedBy: 'employees')]
     private Collection $projects;
 
     /**
      * @var Collection<int, Task>
      */
-    #[ORM\OneToMany(targetEntity: Task::class, mappedBy: 'Employee')]
+    #[ORM\OneToMany(targetEntity: Task::class, mappedBy: 'employee')]
     private Collection $tasks;
 
     public function __construct()
@@ -67,60 +67,60 @@ class Employee
 
     public function getLastName(): ?string
     {
-        return $this->LastName;
+        return $this->lastName;
     }
 
-    public function setLastName(string $LastName): static
+    public function setLastName(string $lastName): static
     {
-        $this->LastName = $LastName;
+        $this->lastName = $lastName;
 
         return $this;
     }
 
     public function getFirstName(): ?string
     {
-        return $this->FirstName;
+        return $this->firstName;
     }
 
-    public function setFirstName(string $FirstName): static
+    public function setFirstName(string $firstName): static
     {
-        $this->FirstName = $FirstName;
+        $this->firstName = $firstName;
 
         return $this;
     }
 
     public function getEmail(): ?string
     {
-        return $this->Email;
+        return $this->email;
     }
 
-    public function setEmail(string $Email): static
+    public function setEmail(string $email): static
     {
-        $this->Email = $Email;
+        $this->email = $email;
 
         return $this;
     }
 
     public function getEntryDate(): ?\DateTimeImmutable
     {
-        return $this->EntryDate;
+        return $this->entryDate;
     }
 
-    public function setEntryDate(\DateTimeImmutable $EntryDate): static
+    public function setEntryDate(\DateTimeImmutable $entryDate): static
     {
-        $this->EntryDate = $EntryDate;
+        $this->entryDate = $entryDate;
 
         return $this;
     }
 
     public function getContractType(): ?ContractStatus
     {
-        return $this->ContractType;
+        return $this->contractType;
     }
 
-    public function setContractType(ContractStatus $ContractType): static
+    public function setContractType(ContractStatus $contractType): static
     {
-        $this->ContractType = $ContractType;
+        $this->contractType = $contractType;
 
         return $this;
     }

@@ -20,26 +20,14 @@ class EmployeeType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options): void
     {
         $builder
-            ->add('LastName', TextType::class)
-            ->add('FirstName', TextType::class)
-            ->add('Email', EmailType::class)
-            ->add('EntryDate', DateType::class, [
+            ->add('lastName', TextType::class)
+            ->add('firstName', TextType::class)
+            ->add('email', EmailType::class)
+            ->add('entryDate', DateType::class, [
                 'widget' => 'single_text',
             ])
-            ->add('ContractType', EnumType::class, [
+            ->add('contractType', EnumType::class, [
                 'class' => ContractStatus::class,
-            ])
-            ->add('projects', EntityType::class, [
-                'class' => Project::class,
-                'choice_label' => 'name',
-                'required'   => false,
-                'multiple' => true,
-            ])
-            ->add('tasks', EntityType::class, [
-                'class' => Task::class,
-                'choice_label' => 'id',
-                'required'   => false,
-                'multiple' => true,
             ])
         ;
     }

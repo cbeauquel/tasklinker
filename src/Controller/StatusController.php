@@ -19,7 +19,7 @@ class StatusController extends AbstractController
 {
     #[Route('/status/new/{projectId}', name: 'app_status_new', methods: ['GET' , 'POST'])]
     #[Route('/status/edit/{projectId}/{id}', name: 'app_status_edit', methods: ['GET' , 'POST'])]
-    public function index(#[MapEntity(mapping: ['projectId' => 'id'])] Project $project, ?Status $status, Request $request, EntityManagerInterface $manager): Response
+    public function index(#[MapEntity(mapping: ['projectId' => 'id'])] ?Project $project, ?Status $status, Request $request, EntityManagerInterface $manager): Response
     {
         $status ??= new Status();
         $form = $this->createForm(StatusType::class, $status);

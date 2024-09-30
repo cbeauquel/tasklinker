@@ -25,7 +25,7 @@ class TaskController extends AbstractController
 
     #[Route('/task/new/{projectId}', name: 'app_task_new', methods: ['GET' , 'POST'])]
     #[Route('/task/edit/{projectId}/{id}', name: 'app_task_edit', methods: ['GET' , 'POST'])]
-    public function new(#[MapEntity(mapping: ['projectId' => 'id'])] Project $project, ?Task $task, Request $request, EntityManagerInterface $manager): Response
+    public function new(#[MapEntity(mapping: ['projectId' => 'id'])] ?Project $project, ?Task $task, Request $request, EntityManagerInterface $manager): Response
     {
         $task ??= new Task();
         $form = $this->createForm(TaskType::class, $task, [

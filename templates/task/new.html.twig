@@ -16,6 +16,9 @@
         {{ form_start(form) }}
         {{ form_widget(form) }}
         <button type="submit" class="button button-submit">Envoyer</button>
+        {% if task.id %}  
+            <a href="{{path('app_task_remove', {projectId: project.id,id: task.id})}}" class="delete-task">Supprimer la tâche</a>
+        {% endif %}
         {{ form_end(form) }}
     </div>
 </main>

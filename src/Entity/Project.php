@@ -37,7 +37,7 @@ class Project
     /**
      * @var Collection<int, Status>
      */
-    #[ORM\OneToMany(targetEntity: Status::class, mappedBy: 'project')]
+    #[ORM\OneToMany(targetEntity: Status::class, mappedBy: 'project', orphanRemoval: true)]
     private Collection $statuses;
 
     public function __construct()

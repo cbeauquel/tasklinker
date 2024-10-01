@@ -21,15 +21,21 @@ class TaskType extends AbstractType
         $project = $options['project'];
 
         $builder
-            ->add('name', TextType::class)
-            ->add('description', TextareaType::class)
+            ->add('name', TextType::class, [
+                'label' => 'task.name',
+            ])
+            ->add('description', TextareaType::class, [
+                'label' => 'task.description',
+            ])
             ->add('startDate', null, [
                 'widget' => 'single_text',
+                'label' => 'task.start_date',
             ])
             ->add('employee', EntityType::class, [
                 'class' => Employee::class,
                 'choices' => $project->getEmployees(),
                 'choice_label' => 'firstName',
+                'label' => 'task.employee',
                 'multiple' => false,
             ])
             ->add('status', EntityType::class, [
@@ -37,6 +43,7 @@ class TaskType extends AbstractType
                 'choices' => $project->getStatuses(),
                 'choice_label' => 'value',
                 'multiple' => false,
+                'label' => 'task.status',
             ])
         ;
     }

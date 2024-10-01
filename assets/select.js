@@ -1,14 +1,3 @@
- import $ from 'jquery';
-
 $(document).ready(function() {
-    $('.employees').select2();
+    $('select[multiple]').select2();
 });
-
-// $(document).ready(function(){
-//     $("h2").hover(function(){
-//       alert("You entered h2!");
-//     },
-//     function(){
-//       alert("Bye! You now leave h2  !");
-//     }); 
-//   });

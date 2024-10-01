@@ -1,0 +1,2 @@
+employee.lastName.not_blank: Veuillez saisir un Nom.
+length.minMessage: Le mot est trop court, saisir au moins 2 caractères.

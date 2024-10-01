@@ -1,0 +1,19 @@
+CDI : Contrat à Durée Indéterminée
+CDD : Contrat à Durée Déterminée
+Interim : Intérimaire
+Freelance : Prestataire
+Apprentice : Apprenti
+Intern : Stagiaire
+employee.last_name : Nom
+employee.first_name : Prénom
+employee.email : Adresse e-mail
+employee.entry_date : Date d'arrivée
+employee.contract_type : Type de contrat
+task.name : Intitulé
+task.description : Description
+task.start_date : Date de démarrage
+task.employee : Collaborateur
+task.status : Statut
+status.value : Libellé
+project.name : Nom du projet
+project.employees : Collaborateurs

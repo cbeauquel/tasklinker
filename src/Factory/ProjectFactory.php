@@ -32,7 +32,7 @@ final class ProjectFactory extends PersistentProxyObjectFactory
     protected function defaults(): array|callable
     {
         return [
-            'name' => self::faker()->unique()->word(2),
+            'name' => self::faker()->unique()->Sentence(4),
             'employees' => EmployeeFactory::randomSet(self::faker()->numberBetween(1,2)),
         ];
     }

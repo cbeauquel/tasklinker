@@ -164,7 +164,7 @@ class Employee
     {
         if (!$this->tasks->contains($task)) {
             $this->tasks->add($task);
-            $task->addEmployee($this);
+            $task->setEmployee($this);
         }
 
         return $this;
@@ -173,7 +173,9 @@ class Employee
     public function removeTask(Task $task): static
     {
         if ($this->tasks->removeElement($task)) {
-            $task->removeEmployee($this);
+            if ($task->getEmployee() === $this) {
+                $task->setEmployee(null);
+            }
         }
 
         return $this;

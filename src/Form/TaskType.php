@@ -37,6 +37,7 @@ class TaskType extends AbstractType
                 'choice_label' => 'firstName',
                 'label' => 'task.employee',
                 'multiple' => false,
+                'required' => false,
             ])
             ->add('status', EntityType::class, [
                 'class' => Status::class,

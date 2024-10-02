@@ -25,7 +25,7 @@ class Project
     /**
      * @var Collection<int, Employee>
      */
-    #[ORM\ManyToMany(targetEntity: Employee::class, mappedBy: 'projects')]
+    #[ORM\ManyToMany(targetEntity: Employee::class, mappedBy: 'projects', cascade: ['persist'])]
     private Collection $employees;
 
     /**
@@ -84,7 +84,7 @@ class Project
 
     public function removeEmployee(Employee $employee): static
     {
-        $this->employee->removeElement($employee);
+        $this->employees->removeElement($employee);
 
         return $this;
     }

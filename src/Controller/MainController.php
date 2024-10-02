@@ -8,7 +8,7 @@ use Symfony\Component\Routing\Attribute\Route;
 
 class MainController extends AbstractController
 {
-    #[Route('/accueil', name: 'app_main', methods: ['GET', 'POST'])]
+    #[Route('/accueil', name: 'app_main')]
     public function index(): Response
     {
         return $this->redirectToRoute('app_projects');

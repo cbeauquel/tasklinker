@@ -16,7 +16,7 @@ use Doctrine\ORM\EntityManagerInterface;
 #[Route('/project')]
 class ProjectController extends AbstractController
 {
-    #[Route('/', name: 'app_projects', methods: ['GET', 'POST'])]
+    #[Route('/', name: 'app_projects')]
     public function projects(ProjectRepository $repository): Response
     {
         $projects = $repository->findall();
@@ -49,7 +49,7 @@ class ProjectController extends AbstractController
         ]);
     }
     
-    #[Route('/{id}', name: 'app_project', requirements: ['id' => '\d+'], methods: ['GET', 'POST'])]
+    #[Route('/{id}', name: 'app_project', requirements: ['id' => '\d+'], methods: ['GET'])]
     public function show(?Project $project): Response
     {
         return $this->render('project/project.html.twig', [
@@ -58,7 +58,7 @@ class ProjectController extends AbstractController
     }
     
     #[Route('/remove/{id}', name: 'app_project_remove', methods: ['GET', 'POST'])]
-    public function remove(?Project $project, Request $request, EntityManagerInterface $manager ): Response
+    public function remove(?Project $project, EntityManagerInterface $manager ): Response
     {
         $manager->remove($project);
         $manager->flush();

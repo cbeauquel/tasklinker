@@ -35,7 +35,7 @@ class Task
     private ?\DateTimeImmutable $startDate = null;
 
     #[ORM\ManyToOne(inversedBy: 'tasks')]
-    #[ORM\JoinColumn(nullable: false)]
+    #[ORM\JoinColumn(nullable: true)]
     private ?Employee $employee = null;
 
     #[ORM\ManyToOne(inversedBy: 'tasks')]

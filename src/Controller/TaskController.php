@@ -16,16 +16,8 @@ use Doctrine\ORM\EntityManagerInterface;
 #[Route('/task')]
 class TaskController extends AbstractController
 {
-    #[Route('/', name: 'app_task')]
-    public function index(): Response
-    {
-        return $this->render('task/index.html.twig', [
-            'controller_name' => 'TaskController',
-        ]);
-    }
-
-    #[Route('/new/{projectId}', name: 'app_task_new', methods: ['GET' , 'POST'])]
-    #[Route('/edit/{projectId}/{id}', name: 'app_task_edit', methods: ['GET' , 'POST'])]
+    #[Route('/new/{projectId}', name: 'app_task_new', requirements: ['id' => '\d+'], methods: ['GET' , 'POST'])]
+    #[Route('/edit/{projectId}/{id}', name: 'app_task_edit', requirements: ['id' => '\d+'], methods: ['GET' , 'POST'])]
     public function new(#[MapEntity(mapping: ['projectId' => 'id'])] ?Project $project, ?Task $task, Request $request, EntityManagerInterface $manager): Response
     {
         $task ??= new Task();
@@ -49,8 +41,8 @@ class TaskController extends AbstractController
         ]);
     }
 
-    #[Route('/remove/{projectId}/{id}', name: 'app_task_remove', methods: ['GET', 'POST'])]
-    public function remove(?Task $task, Request $request, EntityManagerInterface $manager, #[MapEntity(mapping: ['projectId' => 'id'])] ?Project $project): Response
+    #[Route('/remove/{projectId}/{id}', name: 'app_task_remove', requirements: ['id' => '\d+'], methods: ['GET', 'POST'])]
+    public function remove(?Task $task, EntityManagerInterface $manager, #[MapEntity(mapping: ['projectId' => 'id'])] ?Project $project): Response
     {
         $manager->remove($task);
         $manager->flush();

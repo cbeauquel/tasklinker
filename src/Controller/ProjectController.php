@@ -5,7 +5,6 @@ namespace App\Controller;
 use App\Entity\Project;
 use App\Entity\Employee;
 use App\Repository\ProjectRepository;
-use App\Repository\EmployeeRepository;
 use App\Form\ProjectType;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;

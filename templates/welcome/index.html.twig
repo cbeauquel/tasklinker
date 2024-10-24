@@ -1,0 +1,21 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Bienvenue{% endblock %}
+
+{% block body %}
+<main>
+    <div id="welcome" class="square-center">
+            <h1>Bienvenue sur Tasklinker</h1>
+            <h2>Commencez dès maintenant - gratuitement</h2>
+            <p>Vous avez déjà un compte ?</p>
+            <a class="button button-dark" href="{{path('welcome_app_login')}}">Se connecter</a>
+                <div class="ou">
+                    <div class="ou-line"></div>
+                    <div class="ou-text">ou</div>
+                    <div class="ou-line"></div>
+                </div>
+            <a class="button" href="{{path('welcome_app_register')}}">S'inscrire</a>
+    </div>
+    </main>
+{% endblock %}
+ 

@@ -3,10 +3,7 @@
 namespace App\Form;
 
 use App\Entity\Employee;
-use App\Entity\Project;
-use App\Entity\Task;
 use App\Enum\ContractStatus;
-use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
@@ -14,8 +11,6 @@ use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\Extension\Core\Type\EmailType;
 use Symfony\Component\Form\Extension\Core\Type\DateType;
 use Symfony\Component\Form\Extension\Core\Type\EnumType;
-use Symfony\Contracts\Translation\TranslatableInterface;
-use Symfony\Contracts\Translation\TranslatorInterface;
 
 class EmployeeType extends AbstractType
 {
@@ -40,6 +35,9 @@ class EmployeeType extends AbstractType
             ->add('contractType', EnumType::class, [
                 'class' => ContractStatus::class,
                 'label' => 'employee.contract_type',
+            ])
+            ->add('role', TextType::class, [
+                'label' => 'employee.roles',
             ])
         ;
     }

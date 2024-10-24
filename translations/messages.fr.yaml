@@ -17,3 +17,7 @@ task.status : Statut
 status.value : Libellé
 project.name : Nom du projet
 project.employees : Collaborateurs
+Employee : Employé
+employee.Project Manager : Chef de projet
+employee.plain_password : Mot de passe
+employee.confirm_password : Confirmation du mot de passe

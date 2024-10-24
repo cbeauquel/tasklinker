@@ -38,6 +38,7 @@ final class EmployeeFactory extends PersistentProxyObjectFactory
             'entryDate' => \DateTimeImmutable::createFromMutable(self::faker()->dateTime()),
             'firstName' => self::faker()->firstName(),
             'lastName' => self::faker()->lastName(),
+            'password' => self::faker()->password(),
         ];
     }
 

@@ -17,14 +17,15 @@
         {% endblock %}
     </head>
     <body>
-        <div id="main-container">
+        <div id="main-container" class="{% if app.current_route  starts with 'welcome_' %} welcome-background {% endif %}">
+         {% if app.current_route  starts with 'app_' %}
          <nav>
-            <a href="{{path('app_main')}}" id="logo">
+            <a href="{{path('welcome_app_main')}}" id="logo">
             <img src="{{asset('img/logo.png')}}" alt="Logo TaskLinker" />
             </a>
             <ul id="main-menu">
                <li class="{% if app.current_route starts with 'app_project' %} active {% endif %}">
-                  <a href="{{path('app_main')}}">
+                  <a href="{{path('app_projects')}}">
                   <i class="fa-solid fa-list-check"></i> Projets
                   </a>
                </li>
@@ -35,6 +36,7 @@
                </li>
             </ul>
          </nav>
+         {% endif %}
         {% block body %}{% endblock %}
         </div>
 

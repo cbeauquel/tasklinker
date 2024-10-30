@@ -15,6 +15,7 @@
                 <tr>
                 <th>Prénom, Nom</th>
                 <th>Statut</th>
+                <th>Habilitations</th>
                 <th>Actions</th>
                 </tr>
             </thead>
@@ -34,6 +35,13 @@
                     </div>
                 </td>
                 <td>{{employee.contractType.name|trans}}</td>
+                <td>
+                    <ul>
+                        {% for role in employee.roles %}
+                        <li>{{role}}</li>
+                        {% endfor %}
+                    </ul>
+                </td>
                 <td>
                     <a class="button button-edit-team" href="{{path('app_employee_edit', {id: employee.id})}}">
                     Éditer

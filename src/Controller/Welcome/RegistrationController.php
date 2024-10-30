@@ -21,6 +21,12 @@ class RegistrationController extends AbstractController
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
+
+            // $jsonArray = $form->get('roles')->getData();
+            // $roles = json_decode($jsonArray, true);
+            $roles = ['role_employee' => 'ROLE_EMPLOYEE'];
+            $user->setRoles($roles);
+
             /** @var string $plainPassword */
             $plainPassword = $form->get('plainPassword')->getData();
 

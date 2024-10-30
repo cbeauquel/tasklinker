@@ -12,7 +12,13 @@
     </header>
     <div id="content">
         {{ form_start(form) }}
-        {{ form_widget(form) }}
+            {{ form_row(form.lastName) }}
+            {{ form_row(form.firstName) }}
+            {{ form_row(form.email) }}
+            {{ form_row(form.plainPassword) }}
+            {{ form_row(form.entryDate) }}
+            {{ form_row(form.contractType) }}
+            {{ form_row(form.roles) }}
         <button type="submit" class="button button-submit">Envoyer</button>
         {{ form_end(form) }}
     </div>

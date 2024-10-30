@@ -29,14 +29,23 @@
                   <i class="fa-solid fa-list-check"></i> Projets
                   </a>
                </li>
+               {% if is_granted('ROLE_PROJECT_MANAGER') %}
                <li class="{% if app.current_route starts with 'app_employee' %} active {% endif %}">
                   <a href="{{path('app_employee')}}">
                   <i class="fa-regular fa-user"></i> Équipe
                   </a>
                </li>
+               {% endif %}
             </ul>
          </nav>
+         {% else %}
+            <div class="logo">
+                <a href="{{path('welcome_app_main')}}" id="logo">
+                <img src="{{asset('img/logo.png')}}" alt="Logo TaskLinker" />
+                </a>
+            </div>
          {% endif %}
+
         {% block body %}{% endblock %}
         </div>
 

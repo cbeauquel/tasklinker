@@ -21,3 +21,4 @@ Employee : Employé
 employee.Project Manager : Chef de projet
 employee.plain_password : Mot de passe
 employee.confirm_password : Confirmation du mot de passe
+employee.roles : Autorisations

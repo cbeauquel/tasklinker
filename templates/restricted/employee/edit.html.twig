@@ -1,0 +1,26 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Modifier les informations d'un Employé{% endblock %}
+
+{% block body %}
+<main>
+    <header>
+        <div id="current-user"></div>
+            <div id="title-page">
+                <h1>Modifier collaborateur</h1>
+            </div>
+    </header>
+    <div id="content">
+        {{ form_start(form) }}
+            {{ form_row(form.lastName) }}
+            {{ form_row(form.firstName) }}
+            {{ form_row(form.email) }}
+            {{ form_row(form.entryDate) }}
+            {{ form_row(form.contractType) }}
+            {{ form_row(form.roles) }}
+        <button type="submit" class="button button-submit">Envoyer</button>
+        {{ form_end(form) }}
+    </div>
+</main>
+
+{% endblock %}

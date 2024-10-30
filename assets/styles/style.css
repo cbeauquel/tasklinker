@@ -28,6 +28,7 @@ nav {
     padding: 50px 15px;
 }
 
+
 main {
     flex: 1;
 }
@@ -40,6 +41,11 @@ main {
 #logo img {
     width: 183px;
     margin-bottom: 70px;
+}
+
+.logo {
+    padding:50px 0px 0px 50px;
+    margin-right:-283px;
 }
 
 ul#main-menu {

@@ -270,11 +270,23 @@ div#projects-container {
     border: 1px solid lightgray;
 }
 
+.user-initiales .avatar {
+    background: #fff;
+}
+
 .user-list {
     display: flex;
     color: #fff;
     font-size: 18px;
     font-weight: 700;
+}
+
+.user-initiales {
+    display: flex;
+    color: #1C5B50;
+    font-size: 18px;
+    font-weight: 700;
+    justify-content: flex-end;
 }
 
 .button {

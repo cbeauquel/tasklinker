@@ -1,22 +1,14 @@
 {% extends 'base.html.twig' %}
 
 {% block title %}Liste des projets{% endblock %}
-
-{% block body %}
-<main>
-    <header>
-        <div id="current-user">
-            <div class="user-initiales">
-                {% if app.user %}
-                    {% set initiales = app.user.firstName|slice(0,1) ~ app.user.lastName|slice(0,1) %}
-                    <div class="avatar">{{ initiales }}</div>
-                {% endif %}
-            </div>
-        </div>
+{% block header %}
         <div id="title-page">
             <h1>Projets</h1>
         </div>
-    </header>
+{% endblock %}
+
+{% block body %}
+
     <div id="content">
         <div id="projects-container">
             {% for project in projects %}

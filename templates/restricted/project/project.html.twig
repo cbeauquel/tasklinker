@@ -1,18 +1,7 @@
 {% extends 'base.html.twig' %}
 
 {% block title %}{{project.name}}{% endblock %}
-
-{% block body %}
-<main>
-    <header>
-        <div id="current-user">
-            <div class="user-initiales">
-                {% if app.user %}
-                    {% set initiales = app.user.firstName|slice(0,1) ~ app.user.lastName|slice(0,1) %}
-                    <div class="avatar">{{ initiales }}</div>
-                {% endif %}
-            </div>
-        </div>
+{% block header %}
         <div id="title-page">
             <div class="flex-header">
                 <h1>{{project.name}}</h1>
@@ -25,10 +14,13 @@
                 {% if is_granted('ROLE_PROJECT_MANAGER') %}
                 <a class="button" href="{{path('app_project_edit', {id: project.id})}}">Modifier</a>
                 {% endif %}
-
             </div>
         </div>
-    </header>
+{% endblock %}
+
+
+{% block body %}
+
     <div id="content">
         <div id="tasks-container">
             {% for status in project.statuses %}
@@ -72,7 +64,6 @@
         </div>
 
     </div>
-
 
 </main>
 {% endblock %}

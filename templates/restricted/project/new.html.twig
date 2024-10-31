@@ -2,22 +2,13 @@
 {% set action = app.current_route == 'app_project_new' ? 'Ajout' : 'Édition' %}
 
 {% block title %}{{ action }}d'un projet{% endblock %}
+{% block header %}
+        <div id="title-page">
+            <h1>{{ action }} d'un projet</h1>
+        </div>
+{% endblock %}
 
 {% block body %}
-<main>
-    <header>
-        <div id="current-user">
-            <div class="user-initiales">
-                {% if app.user %}
-                    {% set initiales = app.user.firstName|slice(0,1) ~ app.user.lastName|slice(0,1) %}
-                    <div class="avatar">{{ initiales }}</div>
-                {% endif %}
-            </div>
-        </div>
-            <div id="title-page">
-                <h1>{{ action }} d'un projet</h1>
-            </div>
-    </header>
     <div id="content">
         {{ form_start(form) }}
         {{ form_widget(form) }}

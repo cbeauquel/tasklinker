@@ -10,9 +10,10 @@ use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Attribute\Route;
+use Symfony\Component\Security\Http\Attribute\IsGranted;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\PasswordHasher\Hasher\UserPasswordHasherInterface;
-use Symfony\Component\Security\Http\Attribute\IsGranted;
+use Scheb\TwoFactorBundle\Security\TwoFactor\Provider\Google\GoogleAuthenticatorInterface;
 
 #[IsGranted('ROLE_PROJECT_MANAGER')]
 #[Route('/restricted/employee')]
@@ -59,7 +60,7 @@ class EmployeeController extends AbstractController
     }
 
     #[Route('/edit/{id}', name: 'app_employee_edit', requirements: ['id' => '\d+'], methods: ['GET', 'POST'])]
-    public function edit(?Employee $employee, Request $request, EntityManagerInterface $manager): Response
+    public function edit(?Employee $employee, Request $request, EntityManagerInterface $manager, GoogleAuthenticatorInterface $googleAuth): Response
     {       
         $form = $this->createForm(EmployeeUpdateType::class, $employee);
         $form->handleRequest($request);
@@ -67,6 +68,7 @@ class EmployeeController extends AbstractController
         if($form->isSubmitted() && $form->isValid() ){
             $roles = $form->get('roles')->getData();
             $employee->setRoles($roles);
+            $employee->setGoogleAuthenticatorSecret($googleAuth->generateSecret());
 
             $manager->persist($employee);
             $manager->flush();

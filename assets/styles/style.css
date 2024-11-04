@@ -138,6 +138,10 @@ div#welcome{
     padding:30px 60px;
 }
 
+.qrcode{
+    margin:20px 0;
+}
+
 .ou {
     display: flex;
     align-items: center;

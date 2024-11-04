@@ -5,16 +5,17 @@ namespace App\Controller\Welcome;
 use App\Entity\Employee;
 use App\Form\RegistrationFormType;
 use Doctrine\ORM\EntityManagerInterface;
-use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
-use Symfony\Component\PasswordHasher\Hasher\UserPasswordHasherInterface;
 use Symfony\Component\Routing\Attribute\Route;
+use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\PasswordHasher\Hasher\UserPasswordHasherInterface;
+use Scheb\TwoFactorBundle\Security\TwoFactor\Provider\Google\GoogleAuthenticatorInterface;
 
 class RegistrationController extends AbstractController
 {
     #[Route('/register', name: 'welcome_app_register')]
-    public function register(Request $request, UserPasswordHasherInterface $userPasswordHasher, EntityManagerInterface $entityManager): Response
+    public function register(Request $request, UserPasswordHasherInterface $userPasswordHasher, EntityManagerInterface $entityManager, GoogleAuthenticatorInterface $googleAuth): Response
     {
         $user = new Employee();
         $form = $this->createForm(RegistrationFormType::class, $user);
@@ -26,6 +27,7 @@ class RegistrationController extends AbstractController
             // $roles = json_decode($jsonArray, true);
             $roles = ['role_employee' => 'ROLE_EMPLOYEE'];
             $user->setRoles($roles);
+            $user->setGoogleAuthenticatorSecret($googleAuth->generateSecret());
 
             /** @var string $plainPassword */
             $plainPassword = $form->get('plainPassword')->getData();

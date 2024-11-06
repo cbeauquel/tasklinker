@@ -31,7 +31,7 @@ class EmployeeController extends AbstractController
     }
 
     #[Route('/new', name: 'app_employee_new', methods: ['GET', 'POST'])]
-    public function new(?Employee $employee, Request $request, UserPasswordHasherInterface $userPasswordHasher, EntityManagerInterface $manager): Response
+    public function new(?Employee $employee, Request $request, UserPasswordHasherInterface $userPasswordHasher, EntityManagerInterface $manager, GoogleAuthenticatorInterface $googleAuth): Response
     {
         $employee == new Employee();
         
@@ -46,6 +46,7 @@ class EmployeeController extends AbstractController
             $employee->setPassword($userPasswordHasher->hashPassword($employee, $plainPassword));
             $roles = $form->get('roles')->getData();
             $employee->setRoles($roles);
+            $employee->setGoogleAuthenticatorSecret($googleAuth->generateSecret());
 
             $manager->persist($employee);
             $manager->flush();
@@ -60,7 +61,7 @@ class EmployeeController extends AbstractController
     }
 
     #[Route('/edit/{id}', name: 'app_employee_edit', requirements: ['id' => '\d+'], methods: ['GET', 'POST'])]
-    public function edit(?Employee $employee, Request $request, EntityManagerInterface $manager, GoogleAuthenticatorInterface $googleAuth): Response
+    public function edit(?Employee $employee, Request $request, EntityManagerInterface $manager): Response
     {       
         $form = $this->createForm(EmployeeUpdateType::class, $employee);
         $form->handleRequest($request);
@@ -68,7 +69,6 @@ class EmployeeController extends AbstractController
         if($form->isSubmitted() && $form->isValid() ){
             $roles = $form->get('roles')->getData();
             $employee->setRoles($roles);
-            $employee->setGoogleAuthenticatorSecret($googleAuth->generateSecret());
 
             $manager->persist($employee);
             $manager->flush();
